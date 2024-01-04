@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --time:500ms;
+    --heightCard: 400px;
+    --widthCard: 300px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    background: #222;
+    overflow: hidden;
+}
+.card{
+    width: var(--widthCard);
+    height: var(--heightCard);
+    perspective: 1000px;
+    left: calc(var(--widthCard) / (-2));
+    transition: var(--time);
+    transition-delay: calc(var(--time) / 2);
+    &:hover{
+        left: 0px;
+        width: calc(var(--widthCard) * 2);
+        transition-delay: 0ms;
+    }
+}
+.frente, .verso, .content{
+    position: absolute;
+    width: var(--widthCard);
+    height: var(--heightCard);
+    top: 0;
+    left: 50%;
+    right: 0;
+    backface-visibility: hidden;
+    transition: var(--time) ease-in-out;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    flex-direction: column;
+    gap: 35px;
+    border-left: thin solid rgb(220, 220, 220);
+    .title{
+        font-size: 25px;
+    }
+    .texto{
+        text-align: center;
+        color: gray;
+        padding-inline: 40px;
+    }
+    .redes{
+        svg{
+            fill: red;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            transition: 1s;
+            cursor: pointer;
+            &:hover{
+                fill: orange;
+            }
+        }
+    }
+}
+.frente{
+    transform: rotateY(0deg);
+    transform-origin: left;
+    transition-delay: calc(var(--time) / 2);
+}
+.card:hover .frente{
+    transform: rotateY(-90deg);
+    transition-delay: 0ms;
+}
+.verso{
+    transform: rotateY(180deg);
+    transform-origin: right;
+    left: 0px;    
+}
+.card:hover .verso{
+    transform: rotateY(0deg);
+    transition-delay: 250ms;
+}
